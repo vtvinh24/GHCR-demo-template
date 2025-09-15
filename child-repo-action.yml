@@ -1,0 +1,17 @@
+name: Run GHCR Compiler
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run-ghcr-compiler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run compiler container
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace ghcr.io/vtvinh24/ghcr-demo-template:latest
